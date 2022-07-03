@@ -1,4 +1,4 @@
-mod sum;
+mod game;
 
 use wasm_bindgen::prelude::*;
 
@@ -9,6 +9,12 @@ extern {
 
 #[wasm_bindgen]
 pub fn greet(name: &str) {
-    alert(&format!("Hello, {}, {}!", name, sum::add(20, 3)));
+    alert(&format!("Hello, {}, {}!", name, 12));
+}
+
+#[wasm_bindgen]
+pub fn render() -> JsValue {
+    let game: game::Game = game::Game::new();
+    return JsValue::from_serde(&game.render()).unwrap();
 }
 

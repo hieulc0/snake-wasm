@@ -13,7 +13,28 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-serde = { version = "1.0", features = ["derive"] }
-wasm-bindgen = { version = "0.2", features = ["serde-serialize"] }
+wasm-bindgen = { version = "0.2.74", features = ["serde-serialize"] }
+wasm-bindgen-futures = "0.4.24"
+serde = { version = "1.0.80", features = ["derive"] }
+serde_derive = "^1.0.59"
+js-sys = "0.3.58"
+
+[dependencies.web-sys]
+version = "0.3.58"
+features = [
+  "console",
+  'Headers',
+  'Request',
+  'RequestInit',
+  'RequestMode',
+  'Response',
+  'Window',
+  'CanvasRenderingContext2d',
+  'Document',
+  'Element',
+  'HtmlCanvasElement',
+]
+
+
 
 

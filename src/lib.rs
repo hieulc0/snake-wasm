@@ -36,15 +36,21 @@ pub fn start() -> web_sys::Element {
 
     let canvas = document.create_element("div").expect("fail to create new element");
     canvas.set_text_content(Some("this is content of canvas"));
+    console_log!("rust: create canvas: {:?}", canvas);
+
+//let c = document
+//    .create_element("div")
+//    .expect("fail to create new element")
+//    .dyn_into::<web_sys::HtmlCanvasElement>()
+//    .map_err(|_| ())
+//    .unwrap();
+
+    // console_log!("rust: dyn_into: {:?}", c);
     return canvas;
 
-// let document = web_sys::window().unwrap().document().unwrap();
-// let canvas = document.get_element_by_id("canvas").unwrap();
-// let canvas: web_sys::HtmlCanvasElement = canvas
-//     .dyn_into::<web_sys::HtmlCanvasElement>()
-//     .map_err(|_| ())
-//     .unwrap();
-// 
+
+    
+     
 // let context = canvas
 //     .get_context("2d")
 //     .unwrap()

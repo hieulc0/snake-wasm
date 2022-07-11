@@ -28,11 +28,16 @@ features = [
   'RequestInit',
   'RequestMode',
   'Response',
-  'Window',
   'CanvasRenderingContext2d',
+  'CssStyleDeclaration',
   'Document',
   'Element',
+  'EventTarget',
   'HtmlCanvasElement',
+  'HtmlElement',
+  'MouseEvent',
+  'Node',
+  'Window',
 ]
 
 

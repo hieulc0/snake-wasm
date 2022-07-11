@@ -56,10 +56,11 @@ pub fn start() -> web_sys::Element {
         .unwrap()
         .unwrap()
         .dyn_into::<web_sys::CanvasRenderingContext2d>()
-        .expect("fail to dyn cast to canvas");
+        .expect("fail to cast to context");
 
     let context = Rc::new(context);
     let pressed = Rc::new(Cell::new(false));
+
     {
         let context = context.clone();
         let pressed = pressed.clone();
@@ -68,23 +69,29 @@ pub fn start() -> web_sys::Element {
             context.move_to(event.offset_x() as f64, event.offset_y() as f64);
             pressed.set(true);
         }) as Box<dyn FnMut(_)>);
-        canvas.add_event_listener_with_callback("mousedown", closure.as_ref().unchecked_ref()).expect("fail to add listener mousedown");
+        canvas
+            .add_event_listener_with_callback("mousedown", closure.as_ref().unchecked_ref())
+            .expect("fail to add listener mousedown");
         closure.forget();
     }
+
     {
         let context = context.clone();
         let pressed = pressed.clone();
         let closure = Closure::wrap(Box::new(move |event: web_sys::MouseEvent| {
-            if pressed.get() {
+            if  pressed.get() {
                 context.line_to(event.offset_x() as f64, event.offset_y() as f64);
                 context.stroke();
                 context.begin_path();
                 context.move_to(event.offset_x() as f64, event.offset_y() as f64);
             }
         }) as Box<dyn FnMut(_)>);
-        canvas.add_event_listener_with_callback("mousemove", closure.as_ref().unchecked_ref()).expect("fail to add listener mousemove");
+        canvas
+            .add_event_listener_with_callback("mousemove", closure.as_ref().unchecked_ref())
+            .expect("fail to add listener mousemove");
         closure.forget();
     }
+
     {
         let context = context.clone();
         let pressed = pressed.clone();
@@ -93,9 +100,12 @@ pub fn start() -> web_sys::Element {
             context.line_to(event.offset_x() as f64, event.offset_y() as f64);
             context.stroke();
         }) as Box<dyn FnMut(_)>);
-        canvas.add_event_listener_with_callback("mouseup", closure.as_ref().unchecked_ref()).expect("fail to add listener to mouseup");
+        canvas
+            .add_event_listener_with_callback("mouseup", closure.as_ref().unchecked_ref())
+            .expect("fail to add listener mouseup");
         closure.forget();
     }
+    
     canvas_container.append_child(&canvas).expect("fail to append child canvas");
     return canvas_container;
 }
